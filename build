@@ -375,27 +375,27 @@ function download_sources() {
 
     if [[ ! -f ${MPFR}.tar.xz ]]; then
         header "DOWNLOADING MPFR"
-        axel https://www.mpfr.org/mpfr-current/${MPFR}.tar.xz
+        wget https://www.mpfr.org/mpfr-current/${MPFR}.tar.xz
     fi
 
     if [[ ! -f ${GMP}.tar.xz ]]; then
         header "DOWNLOADING GMP"
-        axel https://ftp.gnu.org/gnu/gmp/${GMP}.tar.xz
+        wget https://ftp.gnu.org/gnu/gmp/${GMP}.tar.xz
     fi
 
     if [[ ! -f ${MPC}.tar.gz ]]; then
         header "DOWNLOADING MPC"
-        axel https://ftp.gnu.org/gnu/mpc/${MPC}.tar.gz
+        wget https://ftp.gnu.org/gnu/mpc/${MPC}.tar.gz
     fi
 
     if [[ ! -f ${GLIBC}.tar.xz ]]; then
         header "DOWNLOADING GLIBC ${GLIBC} FOR GCC ${VERSION}"
-        axel https://ftp.gnu.org/gnu/glibc/${GLIBC}.tar.xz
+        wget https://ftp.gnu.org/gnu/glibc/${GLIBC}.tar.xz
     fi
 
     if [[ ! -f linux-${LINUX}.tar.xz ]]; then
         header "DOWNLOADING LINUX KERNEL"
-        axel https://cdn.kernel.org/pub/linux/kernel/v${LINUX/.*}.x/linux-${LINUX}.tar.xz
+        wget https://cdn.kernel.org/pub/linux/kernel/v${LINUX/.*}.x/linux-${LINUX}.tar.xz
     fi
 
     if [[ -z ${TARBALLS} ]]; then
@@ -417,33 +417,33 @@ function download_sources() {
     else
         if [[ ! -f binutils-${BINUTILS_tar}.tar.xz ]]; then
             header "DOWNLOADING BINUTILS ${BINUTILS_tar} FOR GCC ${VERSION}"
-            axel https://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_tar}.tar.xz
+            wget https://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_tar}.tar.xz
         fi
 
         if [[ ! -f ${ISL}.tar.xz ]]; then
             header "DOWNLOADING ISL ${ISL} FOR GCC ${VERSION}"
-            axel http://isl.gforge.inria.fr/${ISL}.tar.xz
+            wget http://isl.gforge.inria.fr/${ISL}.tar.xz
         fi
 
         # GNU, any version
         if [[ ${SOURCE} = "gnu" ]]; then
             if [[ ! -f ${GCC}.tar.${EXT:-xz} ]]; then
                 header "DOWNLOADING GCC"
-                axel https://mirrors.kernel.org/gnu/gcc/${GCC}/${GCC}.tar.${EXT:-xz}
+                wget https://mirrors.kernel.org/gnu/gcc/${GCC}/${GCC}.tar.${EXT:-xz}
             fi
             GCC_TAR=${GCC}.tar.${EXT:-xz}
         # Linaro, 8.x and newer
         elif [[ ${VERSION} -ge 8 ]]; then
             if [[ ! -f gcc-arm-src-snapshot-${GCC}.tar.xz ]]; then
                 header "DOWNLOADING GCC"
-                axel https://developer.arm.com/-/media/Files/downloads/gnu-a/${GCC}/srcrel/gcc-arm-src-snapshot-${GCC}.tar.xz
+                wget https://developer.arm.com/-/media/Files/downloads/gnu-a/${GCC}/srcrel/gcc-arm-src-snapshot-${GCC}.tar.xz
             fi
             GCC_TAR=gcc-arm-src-snapshot-${GCC}.tar.xz
         # Linaro, 7.x and older
         else
             if [[ ! -f gcc-${GCC}.tar.gz ]]; then
                 header "DOWNLOADING GCC"
-                axel https://git.linaro.org/toolchain/gcc.git/snapshot/gcc-${GCC}.tar.gz
+                wget https://git.linaro.org/toolchain/gcc.git/snapshot/gcc-${GCC}.tar.gz
             fi
             GCC_TAR=gcc-${GCC}.tar.gz
         fi
