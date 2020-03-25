@@ -393,7 +393,7 @@ function download_sources() {
         if [[ ! -d isl ]]; then
             header "DOWNLOADING ISL"
             # don't use git_clone
-            git clone git://repo.or.cz/isl.git
+            git clone https://repo.or.cz/isl.git
         fi
 
         if [[ ! -d gcc ]]; then
