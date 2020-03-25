@@ -336,20 +336,6 @@ function build_binaries() {
 
     export PATH=${PREBUILTS_BIN}:${PATH}
 
-    if [[ ! -f ${PREBUILTS_BIN}/axel ]]; then
-        AXEL=${ROOT}/sources/axel
-        [[ ! -d ${AXEL} ]] && git -C "$(dirname "${AXEL}")" clone --depth=1 https://github.com/axel-download-accelerator/axel
-        git -C "${AXEL}" clean -fxdq
-        git -C "${AXEL}" pull
-        (
-            cd "${AXEL}" || die "Issue with cloning axel source!"
-            autoreconf -fiv
-            ./configure --prefix="$(dirname "${PREBUILTS_BIN}")"
-            make "${JOBS}" || die "Error building axel!"
-            make "${JOBS}" install || die "Error installing axel!"
-        )
-    fi
-
     if [[ ! -f ${PREBUILTS_BIN}/pigz ]]; then
         PIGZ=${ROOT}/sources/pigz
         [[ ! -d ${PIGZ} ]] && git -C "$(dirname "${PIGZ}")" clone --depth=1 https://github.com/madler/pigz
